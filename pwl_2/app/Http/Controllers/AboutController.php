@@ -11,9 +11,9 @@ class AboutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function about()
     {
-        //
+        echo "Nim: 2141720211, Nama: Fergie Fatah Ardiansyah";
     }
 
     /**
