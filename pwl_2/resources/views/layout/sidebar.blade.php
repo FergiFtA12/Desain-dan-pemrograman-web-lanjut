@@ -87,6 +87,15 @@
             </p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="{{ url('matkul') }}" class="nav-link">
+            <i class="nav-icon far fa-calendar-alt"></i>
+            <p>
+              Mata Kuliah
+              
+            </p>
+          </a>
+        </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
