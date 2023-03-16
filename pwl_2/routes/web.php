@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers;
-use App\Http\Controllers\HomeController;
+namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,54 +43,85 @@ use Illuminate\Support\Facades\Route;
 //    echo 'Menampilkan halaman awal website';
 //});
 
-Route::prefix('program')->group(function () {
-    Route::get('/', function () {
-        echo 'Menampilkan halaman program';
-    });
+// Route::prefix('program')->group(function () {
+//     Route::get('/', function () {
+//         echo 'Menampilkan halaman program';
+//     });
+// });
+
+// Route::resource('/contact', HomeController::class);
+
+// Route::get('/products/marbel-edu-games', function () {
+//     echo 'Menampilkan halaman marbel-edu-games';
+// });
+
+// Route::get('/products/marbel-and-friends-kids-games', function () {
+//     echo 'Menampilkan halaman marbel-and-friends-kids-games';
+// });
+
+// Route::get('/products/riri-story-books', function () {
+//     echo 'Menampilkan halaman riri-story-books';
+// });
+
+// Route::get('/products/kolak-kids-songs', function () {
+//     echo 'Menampilkan halaman kolak-kids-songs';
+// });
+
+// Route::prefix('products')->group(function () {
+//     Route::get('/', function () {
+//         echo '  <a href="http://localhost/Desain%20dan%20pemrograman%20web%20lanjut/pwl_2/public/products/marbel-edu-games">marbel edu games</a><br>
+//                 <a href="http://localhost/Desain%20dan%20pemrograman%20web%20lanjut/pwl_2/public/products/marbel-and-friends-kids-games">marbel-and-friends-kids-games</a><br>
+//                 <a href= "http://localhost/Desain%20dan%20pemrograman%20web%20lanjut/pwl_2/public/products/riri-story-books">riri-story-books</a><br>
+//                 <a href="http://localhost/Desain%20dan%20pemrograman%20web%20lanjut/pwl_2/public/products/kolak-kids-songs">kolak-kids-songs</a><br>
+//         ';
+//     });
+// });
+
+// Route::prefix('program')->group(function () {
+//     Route::get('/', function () {
+//         echo 'Menampilkan halaman program';
+//     });
+// });
+
+//Route::resource('/contact', HomeController::class);
+
+//Route::get('/news/{tittle}', function ($tittle) {
+  //  return 'Menampilkan Berita tentang ' . $tittle;
+//});
+
+//Route::get('/about-us', function () {
+    //  echo "Halaman About Us ";
+  //  });
+
+//Route::get('/contact-us', [HomeController::class, 'contact']);
+
+// Pertemuan 3
+
+// Prektikum 1
+// Route::get('/', [Home2Controller::class, 'home']);
+
+// Route::prefix('product')->group(function () {
+//     Route::get('/', [Home2Controller::class, 'index']);
+//     Route::get('/{product}', [Home2Controller::class, 'product']);
+// });
+
+// Route::get('/news/{id}', [Home2Controller::class, 'news']);
+
+// Route::prefix('program')->group(function () {
+//     Route::get('/', [Home2Controller::class, 'program']);
+// });
+
+// Route::get('/', [Home2Controller::class, 'aboutUs']);
+
+// Route::resource('/contactUs', contactUsController::class);
+
+Route::get('/', function () {
+ return view('layout.Template');
 });
 
-Route::resource('/contact', HomeController::class);
+Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/profile', [ProfileController::class, 'index']);
+Route::get('/pengalaman', [PengalamanController::class, 'index']);
 
-Route::get('/products/marbel-edu-games', function () {
-    echo 'Menampilkan halaman marbel-edu-games';
-});
-
-Route::get('/products/marbel-and-friends-kids-games', function () {
-    echo 'Menampilkan halaman marbel-and-friends-kids-games';
-});
-
-Route::get('/products/riri-story-books', function () {
-    echo 'Menampilkan halaman riri-story-books';
-});
-
-Route::get('/products/kolak-kids-songs', function () {
-    echo 'Menampilkan halaman kolak-kids-songs';
-});
-
-Route::prefix('products')->group(function () {
-    Route::get('/', function () {
-        echo '  <a href="http://localhost/Desain%20dan%20pemrograman%20web%20lanjut/pwl_2/public/products/marbel-edu-games">marbel edu games</a><br>
-                <a href="http://localhost/Desain%20dan%20pemrograman%20web%20lanjut/pwl_2/public/products/marbel-and-friends-kids-games">marbel-and-friends-kids-games</a><br>
-                <a href= "http://localhost/Desain%20dan%20pemrograman%20web%20lanjut/pwl_2/public/products/riri-story-books">riri-story-books</a><br>
-                <a href="http://localhost/Desain%20dan%20pemrograman%20web%20lanjut/pwl_2/public/products/kolak-kids-songs">kolak-kids-songs</a><br>
-        ';
-    });
-});
-
-Route::prefix('program')->group(function () {
-    Route::get('/', function () {
-        echo 'Menampilkan halaman program';
-    });
-});
-
-Route::resource('/contact', HomeController::class);
-
-Route::get('/news/{tittle}', function ($tittle) {
-    return 'Menampilkan Berita tentang ' . $tittle;
-});
-
-Route::get('/about-us', function () {
-      echo "Halaman About Us ";
-    });
-
-Route::get('/contact-us', [HomeController::class, 'contact']);
+Route::get('/kendaraan', [KendaraanController::class, 'index']);
+Route::get('/hobi', [HobiController::class, 'index']);
