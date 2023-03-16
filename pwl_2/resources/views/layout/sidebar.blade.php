@@ -78,6 +78,15 @@
             </p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="{{ url('/keluarga') }}" class="nav-link">
+            <i class="nav-icon far fa-calendar-alt"></i>
+            <p>
+              Keluarga
+              
+            </p>
+          </a>
+        </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
