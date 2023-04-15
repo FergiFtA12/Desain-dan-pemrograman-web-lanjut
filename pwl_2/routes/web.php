@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\LoginController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -115,15 +117,34 @@ use Illuminate\Support\Facades\Route;
 
 // Route::resource('/contactUs', contactUsController::class);
 
-Route::get('/', function () {
- return view('layout.Template');
+
+
+Auth::routes();
+Route::get('/logout', [LoginController::class, 'logout']);
+
+// Route::get('/', function () {
+//   return view('layout.template');
+//  });
+
+  Route::middleware(['auth'])->group(function(){
+
+
+    // Route::get('/', function () {
+    //   return view('layout.template');
+    //  });
+    Route::get('/', [DashboardController::class, 'index']);
+     
+     Route::get('/dashboard', [DashboardController::class, 'index']);
+     Route::get('/profile', [ProfileController::class, 'index']);
+     Route::get('/pengalaman', [PengalamanController::class, 'index']);
+     
+     Route::get('/kendaraan', [KendaraanController::class, 'index']);
+     Route::get('/hobi', [HobiController::class, 'index']);
+     Route::get('/keluarga', [KeluargaController::class, 'index']);
+     Route::get('/matkul', [MatkulController::class, 'index']);
+
+     Route::resource('/mahasiswa', MahasiswaController::class)->parameter('mahasiswa', 'id');
+     
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::get('/profile', [ProfileController::class, 'index']);
-Route::get('/pengalaman', [PengalamanController::class, 'index']);
-
-Route::get('/kendaraan', [KendaraanController::class, 'index']);
-Route::get('/hobi', [HobiController::class, 'index']);
-Route::get('/keluarga', [KeluargaController::class, 'index']);
-Route::get('/matkul', [MatkulController::class, 'index']);
+Route::get('/', [MahasiswaController::class, 'index']);
