@@ -70,6 +70,14 @@
           </li>
         </li>
         <li class="nav-item">
+          <a href="{{ url('/mahasiswa') }}" class="nav-link">
+            <i class="nav-icon far fa-user"></i>
+            <p>
+              Mahasiswa
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="{{ url('/hobi') }}" class="nav-link">
             <i class="nav-icon far fa-calendar-alt"></i>
             <p>

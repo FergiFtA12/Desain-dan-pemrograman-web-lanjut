@@ -40,6 +40,7 @@
                         <th>No</th>
                         <th>NIM</th>
                         <th>Nama</th>
+                        <th>Prodi</th>
                         <th>JK</th>
                         <th>Hp</th>
                         <th>Action</th>
@@ -52,6 +53,8 @@
                             <td>{{++$i}}</td>
                             <td>{{$m->nim}}</td>
                             <td>{{$m->nama}}</td>
+                            <td>{{$m->prodi->nama}}</td>
+                            {{-- <td>1</td> --}}
                             <td>{{$m->jk}}</td>
                             <td>{{$m->hp}}</td>
                             <td style="display: flex">

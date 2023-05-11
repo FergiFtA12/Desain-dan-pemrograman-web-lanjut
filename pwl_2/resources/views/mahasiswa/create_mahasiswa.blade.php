@@ -44,6 +44,24 @@
                       @enderror
                     </div>
                     <div class="form-group">
+                      <label>Prodi</label>
+                      <select name="prodi_id" class="form-control">
+                        <option value="null" selected disabled>silahkan pilih</option>
+                        @foreach ($prodi as $p)
+                          <option value="{{$p->id}}" 
+                          @if(isset($mhs))
+                            @if($mhs->prodi_id == $p->id)
+                            selected
+                            @endif
+                          @endif>{{$p->nama}}</option>
+                        @endforeach
+                      </select>
+                      {{-- <input class="form-control @error('prodi_id') is-invalid @enderror" value="{{ isset($mhs)? $mhs->prodi_id : old('prodi_id') }}" name="prodi_id" type="text"/> --}}
+                      @error('prodi_id')
+                        <span class="error invalid-feedback">{{ $message }} </span>
+                      @enderror
+                    </div>
+                    <div class="form-group">
                       <label>Nama</label>
                       <input class="form-control @error('nama') is-invalid @enderror" value="{{ isset($mhs)? $mhs->nama : old('nama') }}" name="nama" type="text"/>
                       @error('nama')
@@ -66,7 +84,7 @@
                     </div>
                     <div class="form-group">
                       <label>Tanggal Lahir</label>
-                      <input class="form-control @error('tanggal_lahir') is-invalid @enderror" value="{{ isset($mhs)? $mhs->tanggal_lahir : old('tanggal_lahir') }}" name="tanggal_lahir" type="text"/>
+                      <input class="form-control @error('tanggal_lahir') is-invalid @enderror" value="{{ isset($mhs)? $mhs->tanggal_lahir : old('tanggal_lahir') }}" name="tanggal_lahir" type="date"/>
                       @error('tanggal_lahir')
                         <span class="error invalid-feedback">{{ $message }} </span>
                       @enderror
