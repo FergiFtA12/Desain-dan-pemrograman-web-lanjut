@@ -23,4 +23,9 @@ class Mahasiswa extends Model
     public function prodi(){
         return $this->belongsTo(prodiModel::class);
     }
+
+    public function mahasiswa_matakuliah()
+    {
+        return $this->hasMany(mahasiswa_matakuliah::class);
+    }
 }

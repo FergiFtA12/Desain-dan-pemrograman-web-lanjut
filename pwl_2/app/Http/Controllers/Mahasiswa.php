@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\kelas;
 use App\Models\Mahasiswa;
-use App\Models\prodiModel;
 use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\Validator;
 
-class MahasiswaController extends Controller
+class mahasiswaMatkul extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,18 +15,8 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        $mhs = Mahasiswa::all();
-        return view('mahasiswa.mahasiswa')
-                    ->with('mhs', $mhs);
-    }
-
-    public function data()
-    {
-        $data = Mahasiswa::selectRow('id, nim, nama, hp');
-
-        return DataTables::of($data)
-        ->addIndexColumn()
-        ->make(true);
+       
+        return view('mahasiswa.mahasiswa');
     }
 
     /**
@@ -38,9 +26,10 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
+        $kelas = kelas::all();
         return view('mahasiswa.create_mahasiswa')
-            ->with('prodi', prodiModel::all())
-            ->with('url_form', url('/mahasiswa'));
+            ->with('url_form', url('/mahasiswa'))
+            ->with('kelas', $kelas);
     }
 
     /**
@@ -49,41 +38,43 @@ class MahasiswaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
     public function store(Request $request)
     {
-        $rule = [
+        $request->validate([
             'nim' => 'required|string|max:10|unique:mahasiswa,nim',
             'nama' => 'required|string|max:50',
+            'jk' => 'required|in:l,p',
+            'tempat_lahir' => 'required|string|max:50',
+            'tanggal_lahir' => 'required|date',
+            'alamat' => 'required|string|max:225',
             'hp' => 'required|digits_between:6,15',
-        ];
-
-        $validator = Validator::make($request->all(), $rule);
-        if($validator->fails()){
-            return response()->json([
-                'status' => false,
-                'modal_close' => false,
-                'message' => 'Data gagal ditambahkan. ' .$validator->errors()->first(),
-                'data' => $validator->errors()
-            ]);
-        }
-
-        $mhs = Mahasiswa::create($request->all());
-        return response()->json([
-            'status' => ($mhs),
-            'message' => ($mhs)? 'Data berhasil ditambahkan' : 'Data gagal ditambahkan',
-            'data' => null
         ]);
+
+        $data = Mahasiswa::create($request->except(['_token']));
+
+        return redirect('mahasiswa')
+            ->with('success', 'Mahasiswa Berhasil Ditambahkan');
     }
+
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function show(Mahasiswa $mahasiswa)
+    public function show($id)
     {
-        //
+        $mahasiswa = Mahasiswa::with('kelas')->where('id',$id)->first();
+        return view('mahasiswa.detail', ['mahasiswa' => $mahasiswa]);
+    }
+
+    public function nilai($id)
+    {
+        $mahasiswa = Mahasiswa::where('id',$id)->first();
+        $nilai = Mahasiswa ::where('mahasiswa_id',$id)->get();
+        return view('mahasiswa.nilai')
+                ->with('mahasiswa', $mahasiswa)
+                ->with('nilai', $nilai);
     }
 
     /**
@@ -94,11 +85,12 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
+        $kelas = kelas::all();
         $mhs = Mahasiswa::find($id);
         return view('mahasiswa.create_mahasiswa')
             ->with('mhs', $mhs)
-            ->with('prodi', prodiModel::all())
-            ->with('url_form', url('/mahasiswa/'. $id));
+            ->with('url_form', url('/mahasiswa/'. $id))
+            ->with('kelas', $kelas);
     }
 
     /**

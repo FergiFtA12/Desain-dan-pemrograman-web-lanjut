@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ArtisclesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -144,7 +145,12 @@ Route::get('/logout', [LoginController::class, 'logout']);
      Route::get('/matkul', [MatkulController::class, 'index']);
 
      Route::resource('/mahasiswa', MahasiswaController::class)->parameter('mahasiswa', 'id');
+     Route::post('/mahasiswa/data', [MahasiswaController::class, 'data']);
+
+     Route::get('/mahasiswa/{id}/nilai', [MahasiswaController::class, 'nilai']);
      
+     Route::resource('articles', ArticleController::class);
 });
 
 Route::get('/', [MahasiswaController::class, 'index']);
+
